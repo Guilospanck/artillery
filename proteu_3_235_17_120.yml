@@ -1,0 +1,34 @@
+# Code used to test login in the Proteu -> API using Artillery (https://artillery.io/)
+# Created by: Guilherme R Pereira (github.com/guilospanck)
+# Date: July 29 2021
+#
+#  - target: defines the url you're attacking (in this case it is the IP/DNS of the API)
+#  - phases: there are three phases described below:
+#     - Warm up: it lasts for 20s, sending 5 users/s to the target;
+#     - Ramp up load: it lasts for 20s, starting with 5 users/s until 50 users/s;
+#     - Sustained load: it lasts for 20s, sending constantly 50 users/s to the target.
+#  - scenarios: this is where the phases are going to occur. Think about it as the REST requisitions (POST, GET...).
+#               In this case, we have one scenario named "Login Proteu" and the flow of this scenario consists only
+#               of a post request to thr url "/v1/proteu/signin" which expects a json like {email: "something", password: "something"}                
+
+config:
+  target: "http://3.238.0.159"
+  phases:
+    - duration: 20
+      arrivalRate: 5
+      name: Warm up
+    - duration: 20
+      arrivalRate: 5
+      rampTo: 50
+      name: Ramp up load
+    - duration: 20
+      arrivalRate: 50
+      name: Sustained load
+scenarios:
+  - name: "Login Proteu"
+    flow:
+      - post:
+          url: "/v1/proteu/signin"
+          json:
+            email: "rafaelalves@hedro.com"
+            password: "4548rafaelhdr"
