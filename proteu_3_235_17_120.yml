@@ -9,7 +9,7 @@
 #     - Sustained load: it lasts for 20s, sending constantly 50 users/s to the target.
 #  - scenarios: this is where the phases are going to occur. Think about it as the REST requisitions (POST, GET...).
 #               In this case, we have one scenario named "Login Proteu" and the flow of this scenario consists only
-#               of a post request to thr url "/v1/proteu/signin" which expects a json like {email: "something", password: "something"}                
+#               of a post request to the url "{URL AFTER THE TARGET. E.g.: /v1/login}" which expects a json like {email: "something", password: "something"}                
 
 config:
   target: "http{s}://{IP OR DNS}"
@@ -25,7 +25,7 @@ config:
       arrivalRate: 50
       name: Sustained load
 scenarios:
-  - name: "{SCENARIO NAME}"
+  - name: "{SCENARIO NAME. Eg.: Login Proteu}"
     flow:
       - post:
           url: "{URL AFTER THE TARGET. E.g.: /v1/login}"
