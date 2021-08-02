@@ -12,7 +12,7 @@
 #               of a post request to thr url "/v1/proteu/signin" which expects a json like {email: "something", password: "something"}                
 
 config:
-  target: "http://3.238.0.159"
+  target: "http{s}://{IP OR DNS}"
   phases:
     - duration: 20
       arrivalRate: 5
@@ -25,10 +25,10 @@ config:
       arrivalRate: 50
       name: Sustained load
 scenarios:
-  - name: "Login Proteu"
+  - name: "{SCENARIO NAME}"
     flow:
       - post:
-          url: "/v1/proteu/signin"
+          url: "{URL AFTER THE TARGET. E.g.: /v1/login}"
           json:
-            email: "rafaelalves@hedro.com"
-            password: "4548rafaelhdr"
+            email: "{USER}"
+            password: "{PASS}"
